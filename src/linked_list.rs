@@ -1,36 +1,137 @@
-pub struct Node_list<i32> {
+struct Node {
     value: i32,
-    next_node: Option<Box<Node_list<i32>>>,
+    next: Option<Box<Node>>,
 }
 
-impl <i32 : std::fmt::Debug> Node_list<i32>{
-
-    pub fn new(new_value:i32) -> Self{
-        Self{ value : new_value, next_node : None}
+impl Node {
+    // Constructor to create a new Node
+    fn new(value: i32) -> Self {
+        Node {
+            value,
+            next: None,
+        }
     }
+}
+// Define a LinkedList struct
+pub struct LinkedList {
+    head: Option<Box<Node>>,
+}
 
-    pub fn insert(&mut self, value :i32){
-        if (!self.next_node.is_none()){
-            if let Some(next_node_list) = &mut self.next_node{
-                next_node_list.insert(value);
+impl LinkedList {
+    // Constructor to create a new LinkedList
+    pub fn new() -> Self {
+        LinkedList { head: None }
+    }
+    // Function to add a node at the beginning of the list
+    pub fn insert(&mut self, _value: i32) {
+
+        if self.head.is_none(){
+            self.head = Some(Box::new(Node::new(_value)));
+            println!("Value added.")
+        }
+        else {
+            let mut current = &mut self.head;  // Get a mutable reference to head
+
+            while let Some(ref mut node) = current {
+                if node.next.is_none() {
+                    node.next = Some(Box::new(Node::new(_value)));
+                    println!("Value added.");
+                    return;
+                } 
+                current = &mut node.next;  // Move to the next node
             }
         }
-        else{
-            self.next_node = Some(Box::new(Node_list::new(value)))
+    }
+
+    pub fn remove(&mut self, _value: i32) -> bool { 
+        println!("Removing {} ...", _value);       
+        let mut current = &mut self.head;  // Get mutable reference to head
+
+        if current.is_none() {
+            return false;  // List is empty
         }
+    
+        // Handle removing the head of the list if it matches the value
+        if let Some(ref mut node) = current {
+            if node.value == _value {
+                self.head = node.next.take();  // Remove the head by pointing it to the next node
+                return true;
+            }
+        }
+    
+        // Traverse the list to find the node to remove
+        while let Some(ref mut node) = current {
+            if let Some(ref mut next_node) = node.next {
+                if next_node.value == _value {
+                    node.next = next_node.next.take();  // Remove the node by skipping it
+                    return true;
+                }
+            }
+            current = &mut node.next;  // Move to the next node
+        }
+    
+        false // Node not found
+    }
+
+    pub fn print_list(&mut self){
+
+        let mut current = &mut self.head;
+
+        while let Some(ref mut node) = current {
+            print!(" {:?} ->", node.value);
+            current = &mut node.next;      
+        }
+        
+        println!(" null ");
+      
+    }
+
+    pub fn len(&mut self) -> u32{
+        let mut size = 0;
+        
+
+        if !self.head.is_none() {
+            let mut current = &mut self.head;
+            while let Some(ref mut node) = current {
+                size += 1;
+                current = &mut node.next;  
+            }
+        }
+
+        size
+    }
+    // Function to remove a node by value
+    /*pub fn remove(&mut self, value: i32) -> bool {        
+        let mut previous: Option<Box<Node>> = None;
+
+        while let Some(mut node) = current {
+            if node.value == value {
+                // Found the node to remove
+                if let Some(prev) = &mut previous {
+                    prev.next = node.next.take(); // Link previous node to the next of current node
+                    self.head = Some(prev); // Update head
+                } else {
+                    // Removing the head
+                    self.head = node.next.take(); // Update head to the next node
+                }
+                return true; // Node found and removed
+            }
+            previous = Some(node);
+            current = previous.as_mut().unwrap().next.take(); // Move to the next node
+        }
+        false // Node not found
     }
 
     pub fn print_list(&self){
-        
-        print!(" {:?} ->", &self.value);      
-       
 
-        if let Some(next_node) = &self.next_node{
-            next_node.print_list();
+        let mut current = self.head.take();
+
+        while let Some(ref node) = current {
+            print!(" {:?} ->", node.value);      
         }
-        else{
-            println!(" null ");
-        }
-    }
-    
+        
+        println!(" null ");
+      
+    }*/
 }
+

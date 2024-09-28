@@ -9,11 +9,19 @@ fn main() {
     println!("Value added to root {}", tree_root.get_value());
     println!("Value added to root {}", tree_root.get_value());*/
 
-    let mut my_list = Node_list::new(1);
-    my_list.insert(4);
-    my_list.insert(7);
-    my_list.insert(10);
-    my_list.insert(12);
-    my_list.insert(-1);
-    my_list.print_list();
+    let mut list = LinkedList::new();
+    list.insert(42);
+    list.insert(43);
+    list.insert(4);
+    list.insert(5);
+    println!("List size is : {}",list.len());
+    list.len();
+    list.remove(43);    
+    println!("List size is : {}",list.len());
+    list.len();
+    list.remove(4);
+    list.print_list();
+    println!("List size is : {}",list.len());
+
+    
 }
