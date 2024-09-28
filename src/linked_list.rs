@@ -100,38 +100,5 @@ impl LinkedList {
 
         size
     }
-    // Function to remove a node by value
-    /*pub fn remove(&mut self, value: i32) -> bool {        
-        let mut previous: Option<Box<Node>> = None;
-
-        while let Some(mut node) = current {
-            if node.value == value {
-                // Found the node to remove
-                if let Some(prev) = &mut previous {
-                    prev.next = node.next.take(); // Link previous node to the next of current node
-                    self.head = Some(prev); // Update head
-                } else {
-                    // Removing the head
-                    self.head = node.next.take(); // Update head to the next node
-                }
-                return true; // Node found and removed
-            }
-            previous = Some(node);
-            current = previous.as_mut().unwrap().next.take(); // Move to the next node
-        }
-        false // Node not found
-    }
-
-    pub fn print_list(&self){
-
-        let mut current = self.head.take();
-
-        while let Some(ref node) = current {
-            print!(" {:?} ->", node.value);      
-        }
-        
-        println!(" null ");
-      
-    }*/
 }
 
