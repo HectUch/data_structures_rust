@@ -66,12 +66,14 @@ impl BinaryTree {
         true
     }
 
-    fn easy_recursive(leaf : Node){
-        print!(" {} -",leaf.value);
+    fn easy_recursive(leaf : &Node){
+        print!(" {} ",leaf.value);
         if let Some(ref right) = &leaf.right{
+            print!(" - ");
             Self::easy_recursive(right);
         }
         if let Some(ref left) = &leaf.left{
+            print!(" - ");
             Self::easy_recursive(left);
         }
 
@@ -80,8 +82,11 @@ impl BinaryTree {
     pub fn print_tree(&self){
         
         if !self.root.is_none(){
-            println!("something");           
+            if let Some(ref root_leaf) = &self.root{
+            Self::easy_recursive(root_leaf);  
+            println!("");       
             return;
+            }
         }
 
         println!("Empty tree");
