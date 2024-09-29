@@ -29,8 +29,7 @@ impl LinkedList {
             println!("Value added.")
         }
         else {
-            let mut current = &mut self.head;  
-
+            let mut current = &mut self.head;
             while let Some(ref mut node) = current {
                 if node.next.is_none() {
                     node.next = Some(Box::new(Node::new(_value)));
@@ -71,20 +70,16 @@ impl LinkedList {
     }
 
     pub fn print_list(&mut self){
-
-        let mut current = &mut self.head;
-
+        let mut current = &mut self.head;        
         while let Some(ref mut node) = current {
             print!(" {:?} ->", node.value);
             current = &mut node.next;      
-        }
-        
+        }        
         println!(" null ");      
     }
 
     pub fn len(&mut self) -> u32{
-        let mut size = 0;        
-
+        let mut size = 0;
         if !self.head.is_none() {
             let mut current = &mut self.head;
             while let Some(ref mut node) = current {

@@ -1,7 +1,9 @@
 
-mod linked_list;
+mod linkedList;
+mod binaryTree;
 
-use crate::linked_list::*;
+use crate::linkedList::*;
+use crate::binaryTree::*;
 
 fn main() {
     println!("Inserting numbers on the list and printing them.");
@@ -22,6 +24,14 @@ fn main() {
     list.remove(4);
     list.print_list();
     println!("List size is : {}",list.len());
+    println!("====================================");
+    println!("Inserting numbers in the Binary Tree");
+    let mut tree = BinaryTree::new();
+    tree.insert(10);
+    tree.insert(6);
+    tree.insert(12);
+    tree.insert(12);
+    tree.print_tree();
 
     
 }
