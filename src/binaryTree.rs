@@ -84,22 +84,19 @@ impl BinaryTree {
             } else if node.right.is_none() {
                 return node.left; 
             } else {
-                // Node has two children: find the in-order successor
                 let min_node = Self::find_min(&mut node.right);
-                node.value = min_node.value; // Replace with the in-order successor value
-                node.right = Self::remove_node(node.right, min_node.value); // Remove successor node
+                node.value = min_node.value; 
+                node.right = Self::remove_node(node.right, min_node.value); 
                 Some(node)
             }
         }
     }
-
-    // Helper function to find the minimum node in a subtree
+    
     fn find_min(node: &mut Option<Box<Node>>) -> Box<Node> {
         let mut current = node.as_mut().unwrap();
         while let Some(ref mut left) = current.left {
             current = left;
-        }
-        // Since `current` is a reference, clone it to move out of the function
+        }        
         Box::new(Node::new(current.value))
     }
 
@@ -115,8 +112,7 @@ impl BinaryTree {
         }
     }
 
-    pub fn print_tree(&self){
-        
+    pub fn print_tree(&self){        
         if !self.root.is_none(){
             if let Some(ref root_leaf) = &self.root{
             Self::easy_recursive(root_leaf);  
