@@ -27,10 +27,14 @@ fn main() {
     println!("====================================");
     println!("Inserting numbers in the Binary Tree");
     let mut tree = BinaryTree::new();
-    tree.insert(10);
+   /* tree.insert(7);
     tree.insert(6);
     tree.insert(12);
-    tree.insert(12);
+    tree.insert(8);*/
+    tree.insert(10);
+    //tree.insert(12);
+    tree.print_tree();    
+    tree.remove(10);
     tree.print_tree();
 
     

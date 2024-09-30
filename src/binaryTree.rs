@@ -13,7 +13,6 @@ impl Node {
         }
     }
 }
-
 pub struct BinaryTree {
     root: Option<Box<Node>>,
 }
@@ -58,12 +57,50 @@ impl BinaryTree {
                 else {
                     println!("Value already in.");
                     return false;
-                }
-                  
+                }                  
             }
         }
-
         true
+    }
+
+    pub fn remove(&mut self, value: i32) -> bool {
+        self.root = Self::remove_node(self.root.take(), value);
+        self.root.is_some() 
+    }
+
+    fn remove_node(node: Option<Box<Node>>, value: i32) -> Option<Box<Node>> {
+        let mut node = node?;
+        
+        if value < node.value {
+            node.left = Self::remove_node(node.left, value);
+            Some(node)
+        } else if value > node.value {
+            node.right = Self::remove_node(node.right, value);
+            Some(node)
+        } else {
+            
+            if node.left.is_none() {
+                return node.right; 
+            } else if node.right.is_none() {
+                return node.left; 
+            } else {
+                // Node has two children: find the in-order successor
+                let min_node = Self::find_min(&mut node.right);
+                node.value = min_node.value; // Replace with the in-order successor value
+                node.right = Self::remove_node(node.right, min_node.value); // Remove successor node
+                Some(node)
+            }
+        }
+    }
+
+    // Helper function to find the minimum node in a subtree
+    fn find_min(node: &mut Option<Box<Node>>) -> Box<Node> {
+        let mut current = node.as_mut().unwrap();
+        while let Some(ref mut left) = current.left {
+            current = left;
+        }
+        // Since `current` is a reference, clone it to move out of the function
+        Box::new(Node::new(current.value))
     }
 
     fn easy_recursive(leaf : &Node){
@@ -76,7 +113,6 @@ impl BinaryTree {
             print!(" - ");
             Self::easy_recursive(left);
         }
-
     }
 
     pub fn print_tree(&self){
@@ -88,7 +124,6 @@ impl BinaryTree {
             return;
             }
         }
-
         println!("Empty tree");
     }
 
