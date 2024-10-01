@@ -99,7 +99,7 @@ impl BinaryTree {
         }        
         Box::new(Node::new(current.value))
     }
-
+    //Try improving this with ?
     fn easy_recursive(leaf : &Node){
         print!(" {} ",leaf.value);
         if let Some(ref right) = &leaf.right{

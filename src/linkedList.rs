@@ -69,6 +69,25 @@ impl LinkedList {
         false 
     }
 
+    pub fn at(&mut self,_index :i32) -> i32{
+        let mut index = 0;
+        let mut current = &mut self.head;
+
+        if current.is_none() {
+            panic!("Out of bounds");  // List is empty
+        }      
+        
+        while let Some(ref mut node) = current {
+            if index == _index {
+                return node.value;               
+            }
+            current = &mut node.next;
+            index += 1;  
+        }    
+        panic!("Out of bounds"); 
+
+    }
+
     pub fn print_list(&mut self){
         let mut current = &mut self.head;        
         while let Some(ref mut node) = current {

@@ -1,21 +1,22 @@
 
 mod linkedList;
 mod binaryTree;
+mod hstack;
 
 use crate::linkedList::*;
 use crate::binaryTree::*;
+use crate::hstack::*;
 
-fn main() {
+fn test_linked_list(){
     println!("Inserting numbers on the list and printing them.");
-    /*let mut tree_root :Node<i32> = Node::new(2);
-    println!("Value added to root {}", tree_root.get_value());
-    println!("Value added to root {}", tree_root.get_value());*/
-
     let mut list = LinkedList::new();
     list.insert(42);
     list.insert(43);
     list.insert(4);
     list.insert(5);
+    list.print_list();
+    println!("Item at(0) {} ",list.at(0));
+    println!("Item at(2) {} ",list.at(2));
     println!("List size is : {}",list.len());
     list.len();
     list.remove(43);    
@@ -23,7 +24,12 @@ fn main() {
     list.len();
     list.remove(4);
     list.print_list();
+    
     println!("List size is : {}",list.len());
+}
+
+
+fn test_tree(){
     println!("====================================");
     println!("Inserting numbers in the Binary Tree");
     let mut tree = BinaryTree::new();
@@ -36,6 +42,29 @@ fn main() {
     tree.print_tree();    
     tree.remove(10);
     tree.print_tree();
+}
+
+fn test_stack(){
+    println!("====================================");
+    println!("Testing Stack");
+    let mut test_stack = my_Stack::new();
+    test_stack.push(2);
+    test_stack.push(8);
+    test_stack.push(9);
+    test_stack.print_top();
+    test_stack.push(10);
+    test_stack.print_top();
+    test_stack.pop();
+    test_stack.pop();
+    test_stack.print_top();
+
+
+}
+fn main() {
+    
+    test_linked_list();
+    test_tree();
+    test_stack();
 
     
 }
