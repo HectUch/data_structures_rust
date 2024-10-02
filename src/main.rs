@@ -8,6 +8,7 @@ use crate::binaryTree::*;
 use crate::hstack::*;
 
 fn test_linked_list(){
+    println!("====================================");
     println!("Inserting numbers on the list and printing them.");
     let mut list = LinkedList::new();
     list.insert(42);
@@ -26,6 +27,7 @@ fn test_linked_list(){
     list.print_list();
     
     println!("List size is : {}",list.len());
+    println!("====================================");
 }
 
 
@@ -33,15 +35,17 @@ fn test_tree(){
     println!("====================================");
     println!("Inserting numbers in the Binary Tree");
     let mut tree = BinaryTree::new();
-   /* tree.insert(7);
-    tree.insert(6);
-    tree.insert(12);
-    tree.insert(8);*/
     tree.insert(10);
-    //tree.insert(12);
+    tree.insert(7);
+    tree.insert(8);
+    tree.insert(15);
+    tree.insert(18);
+    tree.insert(16);
+    
     tree.print_tree();    
     tree.remove(10);
     tree.print_tree();
+    println!("====================================");
 }
 
 fn test_stack(){
@@ -54,12 +58,12 @@ fn test_stack(){
     test_stack.print_top();
     test_stack.push(10);
     test_stack.print_top();
-    test_stack.pop();
-    test_stack.pop();
+    println!("Popping {} ",test_stack.pop());
+    println!("Popping {} ",test_stack.pop());
     test_stack.print_top();
-
-
+    println!("====================================");
 }
+
 fn main() {
     
     test_linked_list();
